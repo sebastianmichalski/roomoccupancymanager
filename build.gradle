@@ -1,0 +1,47 @@
+plugins {
+    id 'org.springframework.boot' version '2.5.7'
+    id 'io.spring.dependency-management' version '1.0.14.RELEASE'
+    id 'java'
+    id 'groovy'
+}
+
+group = 'com.beusable'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '14'
+
+ext {
+    swaggerVersion = '3.0.0'
+    groovyVersion = '2.5.18'
+    spockVersion = '2.0-groovy-2.5'
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+springBoot {
+    mainClass = "com.beusable.roomoccupancymanager.RoomOccupancyManagerApplication"
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation "io.springfox:springfox-boot-starter:$swaggerVersion"
+    implementation "io.springfox:springfox-swagger-ui:$swaggerVersion"
+    implementation "org.codehaus.groovy:groovy:$groovyVersion"
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation("org.spockframework:spock-core:$spockVersion")
+    testImplementation("org.spockframework:spock-spring:$spockVersion")
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
+}
+
+test {
+    useJUnitPlatform()
+}
