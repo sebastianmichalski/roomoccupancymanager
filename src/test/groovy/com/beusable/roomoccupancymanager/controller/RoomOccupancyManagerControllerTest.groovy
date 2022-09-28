@@ -46,8 +46,9 @@ class RoomOccupancyManagerControllerTest extends Specification {
         economyRooms | premiumRooms | customerBudgets || status
         -1           | 0            | [10.0d]         || MockMvcResultMatchers.status().isBadRequest()
         0            | -1           | [10.0d]         || MockMvcResultMatchers.status().isBadRequest()
-        0            | 1            | [10.0d]         || MockMvcResultMatchers.status().isOk()
         0            | 1            | []              || MockMvcResultMatchers.status().isBadRequest()
         0            | 1            | [-100.0d]       || MockMvcResultMatchers.status().isBadRequest()
+        0            | 1            | [10.0d]         || MockMvcResultMatchers.status().isOk()
+        0            | 1            | [100.0d]        || MockMvcResultMatchers.status().isOk()
     }
 }

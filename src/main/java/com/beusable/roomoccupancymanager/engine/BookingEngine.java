@@ -30,21 +30,25 @@ public class BookingEngine {
 		var resultPremium = new ArrayList<Double>();
 		var economyRoomsAddedToPremium = 0;
 
+		// booking rooms for users with budgets above threshold
 		if (budgetsAboveThreshold != null) {
 			for (int i = 0; i < freePremiumRooms && budgetsAboveThreshold.size() > i; i++) {
 				resultPremium.add(budgetsAboveThreshold.get(i));
 			}
 		}
 
-		if (freePremiumRooms - resultPremium.size() > 0 && freeEconomyRooms < budgetsBelowThreshold.size()) {
-			for (int i = resultPremium.size(), j = 0; i < freePremiumRooms && j < budgetsBelowThreshold.size(); i++, j++) {
-				resultPremium.add(budgetsBelowThreshold.get(j));
-				economyRoomsAddedToPremium++;
+		// booking rooms for users with budgets below threshold
+		if (budgetsBelowThreshold != null) {
+			if (freePremiumRooms - resultPremium.size() > 0 && freeEconomyRooms < budgetsBelowThreshold.size()) {
+				for (int i = resultPremium.size(), j = 0; i < freePremiumRooms && j < budgetsBelowThreshold.size(); i++, j++) {
+					resultPremium.add(budgetsBelowThreshold.get(j));
+					economyRoomsAddedToPremium++;
+				}
 			}
-		}
 
-		for (int i = economyRoomsAddedToPremium; i < budgetsBelowThreshold.size() && freeEconomyRooms > 0; i++, freeEconomyRooms--) {
-			resultEconomy.add(budgetsBelowThreshold.get(i));
+			for (int i = economyRoomsAddedToPremium; i < budgetsBelowThreshold.size() && freeEconomyRooms > 0; i++, freeEconomyRooms--) {
+				resultEconomy.add(budgetsBelowThreshold.get(i));
+			}
 		}
 
 		return RoomOccupancyResponseDto.builder()
