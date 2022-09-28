@@ -28,21 +28,18 @@ public class BookingEngine {
 		var freePremiumRooms = request.getPremiumRooms();
 		var resultEconomy = new ArrayList<Double>();
 		var resultPremium = new ArrayList<Double>();
-		var premiumRoomsAdded = 0;
 		var economyRoomsAddedToPremium = 0;
 
-		if(budgetsAboveThreshold != null) {
+		if (budgetsAboveThreshold != null) {
 			for (int i = 0; i < freePremiumRooms && budgetsAboveThreshold.size() > i; i++) {
 				resultPremium.add(budgetsAboveThreshold.get(i));
-				premiumRoomsAdded++;
 			}
 		}
 
-		if (freePremiumRooms - premiumRoomsAdded > 0 && freeEconomyRooms < budgetsBelowThreshold.size()) {
-			for (int i = premiumRoomsAdded, j = 0; i < freePremiumRooms && j < budgetsBelowThreshold.size(); i++, j++) {
+		if (freePremiumRooms - resultPremium.size() > 0 && freeEconomyRooms < budgetsBelowThreshold.size()) {
+			for (int i = resultPremium.size(), j = 0; i < freePremiumRooms && j < budgetsBelowThreshold.size(); i++, j++) {
 				resultPremium.add(budgetsBelowThreshold.get(j));
 				economyRoomsAddedToPremium++;
-				premiumRoomsAdded++;
 			}
 		}
 

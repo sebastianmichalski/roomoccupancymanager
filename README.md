@@ -99,3 +99,7 @@ curl --location --request POST 'localhost:8080/api/manager/bookrooms' \
 
 ## Swagger UI access when application is running
 [Swagger UI](http://localhost:8080/swagger-ui/index.html)
+
+## App properties
+response message, currency and threshold between economy and premium are customizable by editing
+[application.properties](src/main/resources/application.properties) file
